@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Эффекты кнопок</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            gap: 40px;
+        }
+
+        h1 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .button-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-color {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-color:hover {
+            background: #ee5a5a;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-shake {
+            background: #4ecdc4;
+            color: white;
+        }
+
+        .btn-shake:hover {
+            background: #3dbdb5;
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+        }
+
+        .shake-effect {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+
+        .pulse-effect {
+            animation: pulse 0.6s ease-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .color-change {
+            animation: colorChange 0.5s ease-out;
+        }
+
+        @keyframes colorChange {
+            0%, 100% { background: #ff6b6b; }
+            50% { background: #ffd93d; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Нажми на кнопку!</h1>
+    
+    <div class="button-container">
+        <button class="btn-color" id="colorBtn">Изменить цвет</button>
+        <button class="btn-shake" id="shakeBtn">Тряска</button>
+    </div>
+
+    <script>
+        const colorBtn = document.getElementById('colorBtn');
+        const shakeBtn = document.getElementById('shakeBtn');
+        const body = document.body;
+
+        // Эффект 1: Изменение цвета фона
+        colorBtn.addEventListener('click', () => {
+            colorBtn.classList.add('pulse-effect');
+            setTimeout(() => colorBtn.classList.remove('pulse-effect'), 600);
+
+            const randomColor1 = Math.floor(Math.random() * 256);
+            const randomColor2 = Math.floor(Math.random() * 256);
+            
+            body.style.background = `linear-gradient(135deg, rgb(${randomColor1}, ${randomColor2}, 255) 0%, rgb(255, ${randomColor2}, ${randomColor1}) 100%)`;
+        });
+
+        // Эффект 2: Тряска кнопки
+        shakeBtn.addEventListener('click', () => {
+            shakeBtn.classList.add('shake-effect');
+            setTimeout(() => shakeBtn.classList.remove('shake-effect'), 500);
+        });
+    </script>
+</body>
+</html>
